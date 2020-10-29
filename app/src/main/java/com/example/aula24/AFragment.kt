@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_a.*
 
 
@@ -35,11 +36,14 @@ class AFragment : Fragment() {
             val act = activity as MainActivity
 
             btCadastrar.setOnClickListener {
-                act.changeFragment(1)
+                //act.changeFragment(1)
+                //act.tabLayout.getTabAt(1)?.select()
+                viewModel.setOnChangeTab(1)
             }
 
             etNomeEmpresa.doAfterTextChanged {
-                viewModel.onNomeChange.postValue(it.toString())
+                //viewModel.onNomeChange.postValue(it.toString())
+                viewModel.setOnNomeChange(it.toString())
             }
         }
 

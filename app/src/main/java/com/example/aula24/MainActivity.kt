@@ -2,6 +2,7 @@ package com.example.aula24
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: ViewModel
+    private lateinit var viewModel: cadastroViewModel
 
     val afrag = AFragment()
     val bfrag = BFragment()
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
             override fun onTabUnselected(tab: TabLayout.Tab?) { /* sem usar */ }
 
             override fun onTabReselected(tab: TabLayout.Tab?) { /* sem usar */ }
+        })
+
+        viewModel.onChangeTab.observe(this, {
+            tabLayout.getTabAt(it)?.select()
         })
 
     }

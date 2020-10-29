@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_b.*
 
 
@@ -31,13 +32,20 @@ class BFragment : Fragment() {
         activity?.let {
             viewModel = ViewModelProvider(it).get(cadastroViewModel::class.java)
 
+            // esse primeiro parace garantir somente a chamada quando o fragment está ativo
             viewModel.onNomeChange.observe(viewLifecycleOwner) {
                 tvNomeEmpresa.text = it
             }
+            // esse pode chamar com a view suspendida e o tvNomeEmpresa fica nulo
+//            viewModel.onNomeChange.observe(it, {
+//                tvNomeEmpresa?.text = it
+//            })
 
             btVoltar.setOnClickListener {
                 val act = activity as MainActivity
-                act.changeFragment(0)
+                //act.changeFragment(0)
+                //act.tabLayout.getTabAt(0)?.select()
+                viewModel.setOnChangeTab(0)
             }
         }
     }
